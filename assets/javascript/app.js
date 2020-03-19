@@ -198,7 +198,7 @@ $(document).ready(function() {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=United%20States",
+            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=us",
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
@@ -212,7 +212,7 @@ $(document).ready(function() {
             var streamingSites = [
                 { displayName: "Amazon Prime", idRoot: "#amazon-prime-" },
                 { displayName: "Netflix", idRoot: "#netflix-" },
-                { displayName: "Disney+", idRoot: "#disney+-" },
+                { displayName: "Disney Plus", idRoot: "#disney+-" },
                 { displayName: "Hulu", idRoot: "#hulu-" }
             ]
 

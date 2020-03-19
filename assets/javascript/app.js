@@ -1,37 +1,4 @@
-// var movie= ""
-// function populatePage(movieData) {
-//     var title = movieData.titles[0].title
-//     var imageURL = movieData.titles[0].image
-//     var image =$('<img>').attr("src",imageURL)
-//     image.css("height","400px")
-//     $("#movie-title").text(title)
-//     $("#movie-poster").empty()
-//     $("#movie-poster").append(image)
-    
 
-// }
-
-// $("#submit").on("click", function(event){
-//     event.preventDefault();
-//     movie = $("#movie-input").val().trim()
-
-// var settings = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/"+ movie ,
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com",
-// 		"x-rapidapi-key": "7b724f78f5msh2f9c6b6b67592fbp19f39ejsn86e6e6fe03ae"
-// 	}
-// }
-
-// $.ajax(settings).then(function (response) {
-//     console.log(response);
-//     populatePage(response)
-    
-// });
-// });
 
 $(document).ready(function() {
 
@@ -107,6 +74,8 @@ $(document).ready(function() {
             if (response.Error === "Movie not found!") {
                 $("#no-movie-info").css("display", "block");
             } else {
+                var imdbId = response.imdbID;
+                console.log(imdbId)
                 var director = response.Director;
                 $("#movie-director").text(director);
 
@@ -146,7 +115,7 @@ $(document).ready(function() {
                 $("#streaming-info").css("display", "block");
                 $("#trailer").css("display", "block");
 
-                getStreamingInfo(movie);
+                getStreamingInfo(imdbId);
 
             }
         })
@@ -193,12 +162,12 @@ $(document).ready(function() {
     }
 
     // Streaming the movie 
-    function getStreamingInfo(movie) {
+    function getStreamingInfo(imdbId) {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=United%20States",
+            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id="+imdbId+"&source=imdb",
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
@@ -223,12 +192,12 @@ $(document).ready(function() {
                 $(streamingSites[i].idRoot + "available").append(iconX);
             }
 
-            for (var i = 0; i < response.results[0].locations.length; i++) {
-                console.log(response.results[0].locations[i].display_name);
+            for (var i = 0; i < response.collection.locations.length; i++) {
+                console.log(response.collection.locations[i].display_name);
                 for (var j = 0; j < streamingSites.length; j++) {
-                    if (response.results[0].locations[i].display_name === streamingSites[j].displayName) {
+                    if (response.collection.locations[i].display_name === streamingSites[j].displayName) {
                         var icon = $("<i>").attr("class", "fas fa-check fa-2x");
-                        var streamButton = $("<a>").attr("href", response.results[0].locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
+                        var streamButton = $("<a>").attr("href", response.collection.locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
                         $(streamingSites[j].idRoot + "available").empty();
                         $(streamingSites[j].idRoot + "available").append(icon);
                         $(streamingSites[j].idRoot + "button").empty();

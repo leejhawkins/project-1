@@ -146,7 +146,7 @@ footer {
 
 #stream-platform-netflix,
 #stream-platform-amazon-prime,
-#stream-platform-amazon-instant,
+#stream-platform-disney+,
 #stream-platform-hulu {
     max-width: 200px;
     width: 100%;
@@ -193,37 +193,6 @@ footer {
 a {
     text-decoration: none;
     color: blueviolet;
-}
-
-.map-text {
-    color: black;
-    background-color: pink;
-    font-size: 50px;
-}
-
-#search {
-    padding-bottom: 1px;
-    margin-bottom: 5px;
-}
-
-#zipCode {
-    margin-left: auto;
-}
-
-#map-container-google-2 {
-    overflow: auto;
-}
-
-#panel {
-    margin: 10% 0 0 1.5vw;
-    border-radius: 15px;
-    padding: 2vh;
-}
-
-#invalid-zip-message {
-    color: red;
-    display: none;
-    margin-left: 5px;
 }
 
 @media screen and (min-width: 1200px) {

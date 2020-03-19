@@ -1,0 +1,250 @@
+body {
+    background: grey;
+    font-family: 'Acme', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Righteous', cursive;
+}
+
+h6 {
+    display: inline;
+    padding-right: 8px;
+}
+
+#right-side {
+    background: darkgray;
+}
+
+footer {
+    border-top: 2px solid greenyellow
+}
+
+footer {
+    border-top: 2px solid greenyellow
+}
+
+#logo {
+    max-width: 150px;
+    width: 100%
+}
+
+#search-icon,
+#stream-icon,
+#popcorn-icon {
+    max-width: 125px;
+    width: 100%;
+}
+
+#left {
+    border-right: 4px solid greenyellow;
+}
+
+#submit {
+    background: blue;
+    border: 1px solid green;
+}
+
+#submit:hover {
+    background: orange;
+    border: 1px solid orangered;
+}
+
+#stickThis.stick {
+    margin-top: 0;
+    position: fixed;
+    width: 39%;
+    top: 0;
+    z-index: 9999;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+#imdb-img {
+    max-width: 50px;
+}
+
+#rt-audience-img {
+    max-width: 22px;
+}
+
+#rt-fresh-img {
+    max-width: 28px;
+}
+
+#imdb-score,
+#rt-aud-score,
+#metacritic-score {
+    font-weight: bolder;
+    padding-left: 2px
+}
+
+.fas.fa-heart {
+    cursor: pointer;
+}
+
+.fas.fa-heart:hover::before {
+    color: purple;
+}
+
+#map {
+    height: 100%;
+    float: left;
+    padding: 5%;
+    width: 100%;
+    background-color: grey;
+}
+
+.fav-buttons-below,
+.fav-info-buttons {
+    width: 100%;
+    padding: 0;
+}
+
+.favorite-card {
+    width: 145px;
+    float: left;
+    margin: 4px 4px;
+}
+
+.fav-img {
+    height: 210px;
+    width: auto;
+}
+
+.info-btn {
+    background: blue;
+    border: 1px solid green;
+}
+
+.info-btn:hover {
+    background: blue;
+    border: 1px solid lightblue;
+}
+
+.remove-btn {
+    background: blue;
+    border: 1px solid lightblue;
+}
+
+.remove-btn:hover {
+    background: orange;
+    border: 1px solid orangered;
+}
+
+#streaming-info,#movie-info,#trailer,#no-movie-info {
+    display: none;
+}
+
+.scroll {
+    overflow-y: auto;
+}
+
+#favorite-section {
+    max-height: 35vh;
+}
+
+#stream-platform-netflix,
+#stream-platform-amazon-prime,
+#stream-platform-amazon-instant,
+#stream-platform-hulu {
+    max-width: 200px;
+    width: 100%;
+}
+
+.fa-check {
+    color: green;
+    font-size: 5vw;
+}
+
+.fa-times {
+    color: red;
+    font-size: 5vw;
+}
+
+#panel {
+    background-color: white;
+    position: absolute;
+    float: left;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: all .2s ease-out;
+}
+
+.open {
+    width: 300px;
+}
+
+.hero {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    display: block;
+}
+
+.place {
+    font-size: 1.7em
+}
+
+.details {
+    color: darkblue;
+}
+
+a {
+    text-decoration: none;
+    color: blueviolet;
+}
+
+.map-text {
+    color: black;
+    background-color: pink;
+    font-size: 50px;
+}
+
+#search {
+    padding-bottom: 1px;
+    margin-bottom: 5px;
+}
+
+#zipCode {
+    margin-left: auto;
+}
+
+#map-container-google-2 {
+    overflow: auto;
+}
+
+#panel {
+    margin: 10% 0 0 1.5vw;
+    border-radius: 15px;
+    padding: 2vh;
+}
+
+#invalid-zip-message {
+    color: red;
+    display: none;
+    margin-left: 5px;
+}
+
+@media screen and (min-width: 1200px) {
+    .fa-check,
+    .fa-times {
+        font-size: 60px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #left {
+        border-bottom: 4px solid greenyellow;
+        border-right: none;
+    }
+    #stickThis.stick {
+        margin-top: 0;
+        position: unset;
+        width: 98%;
+        top: 0;
+        z-index: 9999;
+        -webkit-border-radius: 0 0 10px 10px;
+        border-radius: 0 0 10px 10px;
+    }
+}

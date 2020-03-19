@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Google font placement -->
+        <link href="https://fonts.googleapis.com/css?family=Acme|Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Movie Search Database</title>
@@ -34,18 +34,18 @@
                         </div>
                     </div>
 
-                    <!-- USED FOR STICKY SEARCH -->
+                    <!-- Used For Sticky Search -->
                     <div id="stick-here"></div>
                     <div id="stickThis">
 
-                        <!-- MOVIE SEARCH FORM -->
+                        <!-- Movie Search Form -->
                         <form class="mx-5 sidebar-item">
                             <div class="form-row mt-5 ">
                                 <label for="movie-input">
                                     <h3><i class="fas fa-film"></i> Movie Search</h3>
                                 </label>
                                 <input type="" class="form-control shadow" id="movie-input"
-                                    placeholder="Enter Movie Title">
+                                    placeholder="Enter Movie Search">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mt-3 mb-5" id="submit"><i
                                     class="fas fa-search"></i>
@@ -53,7 +53,7 @@
                             </button>
                         </form>
 
-                        <!-- FAVORITE SECTION -->
+                        <!-- Favorite Section -->
                         <div class="card my-4" id="favorite-section">
                             <h5 class="card-header"><i class="far fa-heart"></i> Saved Favorites</h5>
                             <div class="card-body scroll" id="list-favorites">
@@ -68,23 +68,23 @@
 
             <div class="col-lg-7 bg-dark" id="right">
 
-                <!-- MOVIE NOT FOUND DISPLAY -->
+                <!-- Movie Not Found Display -->
                 <div class="card mt-1" id="no-movie-info">
                     <div class="card-body mr-n3">
                         <h3>Movie was not found. <i class="far fa-frown"></i></h3>
                     </div>
                 </div>
 
-                <!-- MOVIE INFO & TRAILER CARD -->
+                <!-- Movie Info & Trailer Card -->
                 <div class="card mt-1" id="movie-info">
                     <h5 class="card-header" id="movie-title">Jurassic Park</h5>
                     <div class="card-body mr-n3">
 
-                        <!-- MOVIE INFO -->
+                        <!-- Movie Info -->
                         <div class="row">
 
 
-                            <!-- MOVIE RATINGS & FAV -->
+                            <!-- Movie Rating -->
                             <div class="col-12">
 
                                 <div class="d-flex bd-highlight mt-n2">
@@ -112,14 +112,15 @@
 
                             </div>
 
+
                             <!-- MOVIE POSTER -->
-                            <div class="col-lg-5 col-12" id="movie-poster">
+                            <div class="col-lg-5 col-12" id="movie-poster"
                                 <img src="assets/images/poster.jpg" class="w-100 img-fluid rounded pr-4"
                                     alt="Movie Poster">
                             </div>
 
 
-                            <!-- MOVIE DETAILS -->
+                            <!-- Movie Details -->
                             <div class="col-lg-7 col-12 ">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item my-n1">
@@ -168,7 +169,7 @@
 
                         <br>
 
-                        <!-- STREAMING INFO -->
+                        <!-- Streaming Info -->
                         <div class="card border-0 mr-2">
                             <h5 class="card-header bg-white border-bottom" id="movie-title"><i class="far fa-eye"></i>
                                 Can You Stream It?</h5>
@@ -214,7 +215,7 @@
                             </div>
 
                         </div>
-                        <!-- TRAILER SECTION -->
+                        <!-- Trailer Section -->
                         <div class="embed-responsive embed-responsive-16by9  mt-2 rounded" id="trailer">
                         </div>
                     </div>
@@ -222,11 +223,11 @@
 
                 <br>
 
-                <!-- MOVIE THEATER INFO -->
+                <!-- Movie Theater Info -->
                 <div class="card mt-n3 movie-theater-info">
                     <h5 class="card-header" id="theater-search">Find a Theater and Time Near You </h5>
 
-                    <!-- GOOGLE MAPS CODE -->
+                    <!-- Google Maps Code -->
                     <div class="card-body">
                         <!-- zip code input field -->
                         <input class="form-control-default" type="text" id="zipCode" pattern="[0-9]{5}"

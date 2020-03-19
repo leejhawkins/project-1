@@ -22,7 +22,7 @@ $("#submit").on("click", function(event){
 var settings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/"+movie ,
+	"url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/"+ movie ,
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com",

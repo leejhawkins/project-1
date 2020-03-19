@@ -147,7 +147,7 @@ $(document).ready(function() {
     // Youtube API Use
     function getYoutubeTrailer(movie, year) {
          
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + movie + " " + year + " trailer&key=AIzaSyAUcvPuQEmB09VvUcwZNUfhtnQ0dt7ilhI";
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + movie + " " + year + " trailer&key=AIzaSyBsq4LWKWMsq_V4wbDbc8K3zXz7EJyRbG4";
         
         $.ajax({
             url: youtubeQueryURL,
@@ -180,7 +180,7 @@ $(document).ready(function() {
             console.log(response);
         
             var streamingSites = [
-                { displayName: "Amazon Prime", idRoot: "#amazon-prime-" },
+                { displayName: "Amazon Prime Video", idRoot: "#amazon-prime-" },
                 { displayName: "Netflix", idRoot: "#netflix-" },
                 { displayName: "Disney Plus", idRoot: "#disney+-" },
                 { displayName: "Hulu", idRoot: "#hulu-" }

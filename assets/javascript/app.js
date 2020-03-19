@@ -1,7 +1,3 @@
-function buildQueryURL() {
-    var queryURL = ": https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/inception"
-    queryParams = {"x-rapidapi-key":"7b724f78f5msh2f9c6b6b67592fbp19f39ejsn86e6e6fe03ae"}
-}
 var movie= ""
 function populatePage(movieData) {
     var title = movieData.titles[0].title

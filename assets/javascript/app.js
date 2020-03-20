@@ -65,17 +65,14 @@ $(document).ready(function() {
 
         $.ajax({
             url: omdbQueryURL,
-            method: "GET",
-            success: function(response) {
-                getYoutubeTrailer(movie, response.Year);
-            }
+            method: "GET"
         }).then(function(response) {
             console.log(response);
             if (response.Error === "Movie not found!") {
                 $("#no-movie-info").css("display", "block");
             } else {
                 var imdbId = response.imdbID;
-                console.log(imdbId)
+                
                 var director = response.Director;
                 $("#movie-director").text(director);
 
@@ -105,18 +102,21 @@ $(document).ready(function() {
 
                 var ratedIMDB = response.Ratings[0].Value;
                 $("#imdb-score").text(ratedIMDB);
+                console.log(response.Ratings.length)
+                if(response.Ratings.length>1) {
+                    var ratedRt = response.Ratings[1].Value;
+                    $("#rt-aud-score").text(ratedRt);
 
-                var ratedRt = response.Ratings[1].Value;
-                $("#rt-aud-score").text(ratedRt);
-
-                var ratedRTF = response.Ratings[2].Value;
+                    var ratedRTF = response.Ratings[2].Value;
                 $("#rt-fresh-score").text(ratedRTF);
+                }
+                
                 $("#movie-info").css("display", "block");
                 $("#streaming-info").css("display", "block");
                 $("#trailer").css("display", "block");
 
                 getStreamingInfo(imdbId);
-
+                getYoutubeTrailer(movie,released)
             }
         })
     }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Acme|Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Movie Search Database</title>
@@ -20,6 +20,7 @@
                     <div class="row text-center">
                         <div class="col-12 mt-5 mb-4"><img class="img-fluid " src="assets/images/Movie-Logo.png"
                                 alt="Movie Logo" id="logo"></div>
+                                <div class="col-2 my-2"></div>
                         <div class="col-4 my-4"><img class="img-fluid" src="assets/images/search.png" alt="Search Icon"
                                 id="search-icon">
                             <p>Search for <br> Movie Information</p>
@@ -27,10 +28,6 @@
                         <div class="col-4 my-4"><img class="img-fluid" src="assets/images/stream.png" alt="Stream Icon"
                                 id="stream-icon">
                             <p>See Where <br> To Stream It</p>
-                        </div>
-                        <div class="col-4 my-4"><img class="img-fluid" src="assets/images/popcorn.png"
-                                alt="Popcorn Icon" id="popcorn-icon">
-                            <p>Find The <br> Closest Theater</p>
                         </div>
                     </div>
 
@@ -114,9 +111,10 @@
 
 
                             <!-- MOVIE POSTER -->
-                            <div class="col-lg-5 col-12" id="movie-poster">
-                                <img src="assets/images/poster.jpg" class="w-100 img-fluid rounded pr-4"
-                                    alt="Movie Poster">
+
+                            <div class="col-lg-5 col-12">
+                                <img src="https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg"
+                                    class="w-100 img-fluid rounded pr-4" alt="Movie Poster" id="movie-poster">
                             </div>
 
 
@@ -181,7 +179,8 @@
                                         <div class="col-sm-6 col-md-3 col-xs-6 p-2 mx-auto "
                                             id="stream-platform-netflix">
                                             <img class="img-fluid mt-1" src="assets/images/netflix.png">
-                                            <div class="text-center mt-n2" id="netflix-available">
+                                            <div class="text-center mt-n2" id="netflix-available"><i
+                                                    class="fas fa-times fa-2x"></i>
                                             </div>
                                             <div id="netflix-button"></div>
 
@@ -190,22 +189,25 @@
                                         <div class="col-sm-6 col-md-3 col-xs-6 p-2 mx-auto "
                                             id="stream-platform-amazon-prime">
                                             <img class="img-fluid mt-1" src="assets/images/amazon-prime.png">
-                                            <div class="text-center mt-n2" id="amazon-prime-available">
+                                            <div class="text-center mt-n2" id="amazon-prime-available"><i
+                                                    class="fas fa-times fa-2x"></i>
                                             </div>
                                             <div id="amazon-prime-button"></div>
                                         </div>
 
                                         <div class="col-sm-6 col-md-3 col-xs-6 p-2 mx-auto "
-                                            id="stream-platform-amazon-instant">
-                                            <img class="img-fluid mt-1" src="assets/images/amazon-instant.png">
-                                            <div class="text-center mt-n2" id="amazon-instant-available">
+                                            id="stream-platform-disney+">
+                                            <img class="img-fluid mt-1" src="assets/images/Disney+.svg">
+                                            <div class="text-center mt-n2" id="disney+-available"><i
+                                                    class="fas fa-times fa-2x"></i>
                                             </div>
-                                            <div id="amazon-instant-button"></div>
+                                            <div id="disney+-button"></div>
                                         </div>
 
                                         <div class="col-sm-6 col-md-3  col-xs-6 p-2 mx-auto " id="stream-platform-hulu">
                                             <img class="img-fluid mt-1" src="assets/images/hulu.png">
-                                            <div class="text-center mt-n2" id="hulu-available">
+                                            <div class="text-center mt-n2" id="hulu-available"><i
+                                                    class="fas fa-times fa-2x"></i>
                                             </div>
                                             <div id="hulu-button"></div>
 
@@ -221,46 +223,11 @@
                     </div>
                 </div>
 
-                <br>
-
-                <!-- Movie Theater Info -->
-                <div class="card mt-n3 movie-theater-info">
-                    <h5 class="card-header" id="theater-search">Find a Theater and Time Near You </h5>
-
-                    <!-- Google Maps Code -->
-                    <div class="card-body">
-                        <!-- zip code input field -->
-                        <input class="form-control-default" type="text" id="zipCode" pattern="[0-9]{5}"
-                            placeholder="Enter Zip Code"></input>
-                        <!-- zip code submit button -->
-                        <button type="submit" class="btn btn-success btn-md" id="search">
-                            <span aria-hidden="true"></span>Search by Zip
-                        </button>
-
-                        <p id="invalid-zip-message">Please enter a valid zip code.</p>
-                        <!-- Google map -->
-                        <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 800px">
-
-                            <!-- The slide-out panel for showing place details -->
-                            <div id="panel"></div>
-
-                            <!-- Map appears here -->
-                            <div id="map"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" id="results-row">
-                    <div class="col-md-6 col-sm-12 mt-2" id="theaters-col"></div>
-                    <div class="col-md-6 col-sm-12 mt-2" id="showtimes-col"></div>
-                </div>
-
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 </body>
 

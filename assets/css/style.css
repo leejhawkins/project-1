@@ -1,5 +1,5 @@
 body {
-    background: grey;
+    
     font-family: 'Acme', sans-serif;
 }
 
@@ -12,9 +12,6 @@ h6 {
     padding-right: 8px;
 }
 
-#right-side {
-    background: darkgray;
-}
 
 footer {
     border-top: 2px solid greenyellow
@@ -87,13 +84,6 @@ footer {
     color: purple;
 }
 
-#map {
-    height: 100%;
-    float: left;
-    padding: 5%;
-    width: 100%;
-    background-color: grey;
-}
 
 .fav-buttons-below,
 .fav-info-buttons {
@@ -132,9 +122,6 @@ footer {
     border: 1px solid orangered;
 }
 
-#streaming-info,#movie-info,#trailer,#no-movie-info {
-    display: none;
-}
 
 .scroll {
     overflow-y: auto;
@@ -144,12 +131,8 @@ footer {
     max-height: 35vh;
 }
 
-#stream-platform-netflix,
-#stream-platform-amazon-prime,
-#stream-platform-disney+,
-#stream-platform-hulu {
-    max-width: 200px;
-    width: 100%;
+#streaming-services {
+    float:left;
 }
 
 .fa-check {

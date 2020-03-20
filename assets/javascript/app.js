@@ -1,7 +1,5 @@
 
-
-$(document).ready(function () {
-    
+$(document).ready(function() {
     var movies = JSON.parse(localStorage.getItem("movies") || "[]");
     var yourStreaming = [];
     var streamingSites = [
@@ -162,6 +160,7 @@ $(document).ready(function () {
 
                 var ratedIMDB = response.Ratings[0].Value;
                 $("#imdb-score").text(ratedIMDB);
+
                 console.log(response.Ratings.length)
                 if (response.Ratings.length > 1) {
                     var ratedRt = response.Ratings[1].Value;
@@ -226,7 +225,8 @@ $(document).ready(function () {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id=" + imdbId + "&source=imdb",
+
+            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id="+imdbId+"&source=imdb",
 
             "method": "GET",
             "headers": {

@@ -63,17 +63,14 @@ $(document).ready(function() {
 
         $.ajax({
             url: omdbQueryURL,
-            method: "GET",
-            success: function(response) {
-                getYoutubeTrailer(movie, response.Year);
-            }
+            method: "GET"
         }).then(function(response) {
             console.log(response);
             if (response.Error === "Movie not found!") {
                 $("#no-movie-info").css("display", "block");
             } else {
-                var imdbID = response.imdbId;
-                console.log(response);
+                var imdbId = response.imdbID;
+
                 var director = response.Director;
                 $("#movie-director").text(director);
 
@@ -104,17 +101,21 @@ $(document).ready(function() {
                 var ratedIMDB = response.Ratings[0].Value;
                 $("#imdb-score").text(ratedIMDB);
 
-                var ratedRt = response.Ratings[1].Value;
-                $("#rt-aud-score").text(ratedRt);
+                console.log(response.Ratings.length)
+                if(response.Ratings.length>1) {
+                    var ratedRt = response.Ratings[1].Value;
+                    $("#rt-aud-score").text(ratedRt);
 
-                var ratedRTF = response.Ratings[2].Value;
+                    var ratedRTF = response.Ratings[2].Value;
                 $("#rt-fresh-score").text(ratedRTF);
+                }
+
                 $("#movie-info").css("display", "block");
                 $("#streaming-info").css("display", "block");
                 $("#trailer").css("display", "block");
 
-                getStreamingInfo(imdbID);
-
+                getStreamingInfo(imdbId);
+                getYoutubeTrailer(movie,released)
             }
         })
     }
@@ -177,7 +178,7 @@ $(document).ready(function() {
             console.log(response);
         
             var streamingSites = [
-                { displayName: "Amazon Prime", idRoot: "#amazon-prime-" },
+                { displayName: "Amazon Prime Video", idRoot: "#amazon-prime-" },
                 { displayName: "Netflix", idRoot: "#netflix-" },
                 { displayName: "Disney Plus", idRoot: "#disney+-" },
                 { displayName: "Hulu", idRoot: "#hulu-" }
@@ -190,12 +191,12 @@ $(document).ready(function() {
                 $(streamingSites[i].idRoot + "available").append(iconX);
             }
 
-            for (var i = 0; i < response.results[0].locations.length; i++) {
-                console.log(response.results[0].locations[i].display_name);
+            for (var i = 0; i < response.collection.locations.length; i++) {
+                console.log(response.collection.locations[i].display_name);
                 for (var j = 0; j < streamingSites.length; j++) {
-                    if (response.results[0].locations[i].display_name === streamingSites[j].displayName) {
+                    if (response.collection.locations[i].display_name === streamingSites[j].displayName) {
                         var icon = $("<i>").attr("class", "fas fa-check fa-2x");
-                        var streamButton = $("<a>").attr("href", response.results[0].streamingSites[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
+                        var streamButton = $("<a>").attr("href", response.collection.locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
                         $(streamingSites[j].idRoot + "available").empty();
                         $(streamingSites[j].idRoot + "available").append(icon);
                         $(streamingSites[j].idRoot + "button").empty();

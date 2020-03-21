@@ -45,7 +45,6 @@ $(document).ready(function() {
         getMovieInfo($(this).parent().parent().parent().attr("data-movie"));
     })
 
-    
     // Removes favorites
     $("#list-favorites").on("click", ".remove-btn", function () {
         var movieTitle = $(this).parent().parent().parent().attr("data-movie");
@@ -155,12 +154,13 @@ $(document).ready(function() {
     // Youtube API Use
     function getYoutubeTrailer(imdbId) {
 
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" +imdbId +" trailer&key=AIzaSyBsq4LWKWMsq_V4wbDbc8K3zXz7EJyRbG4";
-
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" +imdbId +" trailer&key=AIzaSyC_VBnzUWZnu_i1CYl1oqzpytR8vnFNrkY";
+        
         $.ajax({
             url: youtubeQueryURL,
             method: "GET"
-        }).then(function (response) {
+        }).then(function(response) {
+            console.log(response);
             $("#trailer").empty();
             var trailer = $("<iframe>").addClass("embed-responsive-item pr-3");
             trailer.attr("src", "https://www.youtube.com/embed/" + response.items[0].id.videoId);
@@ -168,15 +168,14 @@ $(document).ready(function() {
         });
     }
 
+
     // Streaming the movie 
     function getStreamingInfo(imdbId) {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-
             "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id="+imdbId+"&source=imdb",
-
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
@@ -217,7 +216,6 @@ $(document).ready(function() {
                     $("#streaming-services").append(streamDiv)
                 }
             }
-           
         });
     }
 

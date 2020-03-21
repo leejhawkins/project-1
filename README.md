@@ -2,11 +2,11 @@
 
 ## Clayton Hill, Lee Hawkins, and Jason Tompkins
 
-## Top 10 movie reviews by year and genre.
+## Search your movie you want to watch and the platform you want to stream from.
 
-## Input the year and genre and the page will pull up the top 10 from that year.
+## Input what movie you want to see and the page will pull up which site shows it and all the info of the movie.
 
-## Rotten Tomates and Youtube APIs
+## OMDB and Youtube APIs
 
 ## Process on building page
 1. Create page layout html/css

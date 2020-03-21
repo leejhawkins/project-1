@@ -1,5 +1,4 @@
 body {
-    background-color: darkgrey;
     font-family: 'Acme', sans-serif;
 }
 
@@ -10,6 +9,10 @@ h1,h2,h3,h4,h5,h6 {
 h6 {
     display: inline;
     padding-right: 8px;
+}
+
+.container-fluid{
+    padding: 0px;
 }
 
 footer {

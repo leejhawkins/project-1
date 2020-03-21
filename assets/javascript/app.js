@@ -1,12 +1,14 @@
 $(document).ready(function() {
+   
     var movies = JSON.parse(localStorage.getItem("movies") || "[]");
     var yourStreaming = [];
     var streamingSites = [
-        { displayName: "Netflix", image: document.images[3] },
-        { displayName: "Amazon Prime Video", image: document.images[4] },
-        { displayName: "Hulu", image: document.images[5] },
-        { displayName: "Google Play", image: document.images[6] },
-        { displayName: "iTunes", image: document.images[7] }
+        { displayName: "Netflix", image: document.images[0] },
+        { displayName: "Amazon Prime Video", image: document.images[1] },
+        { displayName: "Hulu", image: document.images[2] },
+        { displayName: "Google Play", image: document.images[3] },
+        { displayName: "iTunes", image: document.images[4] },
+        { displayName: "HBO", image: document.images[5] }
     ]
     if (movies.length > 0) {
         for (var i = 0; i < movies.length; i++) {
@@ -151,9 +153,9 @@ $(document).ready(function() {
     }
 
     // Youtube API Use
-    function getYoutubeTrailer(movie, year) {
+    function getYoutubeTrailer(imdbId) {
 
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + movie + " " + year + " trailer&key=AIzaSyBsq4LWKWMsq_V4wbDbc8K3zXz7EJyRbG4";
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" +imdbId +" trailer&key=AIzaSyBsq4LWKWMsq_V4wbDbc8K3zXz7EJyRbG4";
 
         $.ajax({
             url: youtubeQueryURL,
@@ -183,11 +185,11 @@ $(document).ready(function() {
         }
 
         $.ajax(settings).done(function (response) {
-            // console.log(response);
+            console.log(response);
 
             for (var i=0;i<yourStreaming.length;i++) {
                 var streamDiv = $('<div>')
-                streamDiv.addClass("card card-title")
+                streamDiv.addClass("card card-title col-xs-6")
                 streamDiv.val(yourStreaming[i])
                 var imgDiv = $('<div>')
                 imgDiv.addClass("card-img-top")
@@ -196,6 +198,7 @@ $(document).ready(function() {
                         imgDiv.append(streamingSites[j].image)
                         streamDiv.append(imgDiv)
                         var canStream = false;
+                        
                         for (var k=0;k<response.collection.locations.length;k++) {
                             if (response.collection.locations[k].display_name === yourStreaming[i]) {
                                 var icon = $("<i>").attr("class", "fas fa-check fa-2x");
@@ -213,7 +216,8 @@ $(document).ready(function() {
                     }
                     $("#streaming-services").append(streamDiv)
                 }
-            }
+        
+           
         });
     }
 

@@ -56,6 +56,9 @@ footer {
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
 }
+.card-img-top {
+    height: 120px;
+}
 
 #imdb-img {
     max-width: 50px;

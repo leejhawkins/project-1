@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var movies = JSON.parse(localStorage.getItem("movies") || "[]");
     var yourStreaming = [];
@@ -289,7 +288,9 @@ $(document).ready(function() {
     function addFavoriteCard(title, poster) {
         var favoriteCard = $("<div>")
             .addClass("card favorite-card")
+
             .attr("data-movie", title);
+
         var cardBody = $("<div>").addClass("card-body fav-buttons-below");
         var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
         buttonsDiv.append(($("<button>")

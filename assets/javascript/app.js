@@ -44,55 +44,7 @@ $(document).ready(function() {
         getMovieInfo($(this).parent().parent().parent().attr("data-movie"));
     })
 
-    $("#streaming").on("click", ".form-check-input", function () {
-        var checked = $(this).val();
-        var unchecked = false;
-        
-       
-
-        if (yourStreaming==""){
-            yourStreaming.push(checked)
-            console.log(yourStreaming)
-            
-        
-        } else { 
-            for (var i=0;i<yourStreaming.length;i++) {
-                if (checked===yourStreaming[i]) {
-                    yourStreaming.splice(i,1)
-                
-                    unchecked = true
-                }
-                
-            
-            }
-            if (!unchecked) {
-            yourStreaming.push(checked)
-            }
-        }
-        console.log(yourStreaming)
-        $("#streaming-services").empty();
-        for (var i=0;i<yourStreaming.length;i++) {
-            var streamDiv = $('<div>')          
-            streamDiv.addClass("card card-title")
-            streamDiv.val(yourStreaming[i])
-            var imgDiv = $('<div>')
-            imgDiv.addClass("card-img-top")
-            for (var j=0;j<streamingSites.length;j++) {
-                if (yourStreaming[i]===streamingSites[j].displayName) {
-                    
-                    imgDiv.append(streamingSites[j].image)
-                    streamDiv.append(imgDiv)
-                   
-                }
-
-            }
-            $('#streaming-services').append(streamDiv)
-
-
-
-        }
-        
-    })
+    
     // Removes favorites
     $("#list-favorites").on("click", ".remove-btn", function () {
         var movieTitle = $(this).parent().parent().parent().attr("data-movie");
@@ -112,10 +64,9 @@ $(document).ready(function() {
         $(window).scroll(sticktothetop);
         sticktothetop();
     });
-
+    //OMDB API Use
     function getMovieInfo(movie) {
 
-        //OMDB API Use
         var omdbQueryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
 
         $.ajax({
@@ -235,7 +186,6 @@ $(document).ready(function() {
         $.ajax(settings).done(function (response) {
             // console.log(response);
 
-            
             for (var i=0;i<yourStreaming.length;i++) {
                 var streamDiv = $('<div>')
                 streamDiv.addClass("card card-title")
@@ -251,40 +201,60 @@ $(document).ready(function() {
                             if (response.collection.locations[k].display_name === yourStreaming[i]) {
                                 var icon = $("<i>").attr("class", "fas fa-check fa-2x");
                                 var streamButton = $("<a>").attr("href", response.collection.locations[k].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
-                                
                                 streamDiv.append(icon);
                                 streamDiv.append(streamButton);
                                 canStream = true
                                 console.log(canStream)
-
-                            } else if (k===response.collection.locations.length-1 && !canStream) {
-                               
+                            } 
+                            else if (k===response.collection.locations.length-1 && !canStream) {
                                 var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
                                 streamDiv.append(iconX)
-                                
                             }
                         }
                     }
                     $("#streaming-services").append(streamDiv)
-    
                 }
-
             }
-            // for (var i = 0; i < response.collection.locations.length; i++) {
-            //     console.log(response.collection.locations[i].display_name);
-            //     for (var j = 0; j < yourStreaming.length; j++) {
-            //         if (response.collection.locations[i].display_name === yourStreaming[j]) {
-            //             var icon = $("<i>").attr("class", "fas fa-check fa-2x");
-            //             var streamButton = $("<a>").attr("href", response.collection.locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
-            //             $(streamingSites[j].idRoot + "available").empty();
-            //             $(streamingSites[j].idRoot + "available").append(icon);
-            //             $(streamingSites[j].idRoot + "button").empty();
-            //             $(streamingSites[j].idRoot + "button").append(streamButton);
-            //         }
-            //     }
-            // }
         });
     }
+
+    $("#streaming").on("click", ".form-check-input", function () {
+
+        var checked = $(this).val();
+        var unchecked = false;
+    
+        if (yourStreaming==""){
+            yourStreaming.push(checked)
+            console.log(yourStreaming)  
+        } 
+        else { 
+            for (var i=0;i<yourStreaming.length;i++) {
+                if (checked===yourStreaming[i]) {
+                    yourStreaming.splice(i,1)
+                    unchecked = true
+                }
+            }
+            if (!unchecked) {
+            yourStreaming.push(checked)
+            }
+        }
+        console.log(yourStreaming)
+        $("#streaming-services").empty();
+        for (var i=0;i<yourStreaming.length;i++) {
+            var streamDiv = $('<div>')          
+            streamDiv.addClass("card card-title")
+            streamDiv.val(yourStreaming[i])
+            var imgDiv = $('<div>')
+            imgDiv.addClass("card-img-top")
+            for (var j=0;j<streamingSites.length;j++) {
+                if (yourStreaming[i]===streamingSites[j].displayName) {
+                    imgDiv.append(streamingSites[j].image)
+                    streamDiv.append(imgDiv)
+                }
+            }
+            $('#streaming-services').append(streamDiv)
+        }
+    })
     // List-favorites div
     function addFavoriteCard(title, poster) {
         var favoriteCard = $("<div>")

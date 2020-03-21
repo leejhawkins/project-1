@@ -1,5 +1,5 @@
 body {
-    
+    background-color: darkgrey;
     font-family: 'Acme', sans-serif;
 }
 
@@ -27,8 +27,7 @@ footer {
 }
 
 #search-icon,
-#stream-icon,
-#popcorn-icon {
+#stream-icon {
     max-width: 125px;
     width: 100%;
 }
@@ -37,12 +36,12 @@ footer {
     border-right: 4px solid greenyellow;
 }
 
-#submit {
+#submit,#dropdownMenuButton {
     background: blue;
     border: 1px solid green;
 }
 
-#submit:hover {
+#submit:hover,#dropdownMenuButton:hover {
     background: orange;
     border: 1px solid orangered;
 }
@@ -111,8 +110,8 @@ footer {
 }
 
 .info-btn:hover {
-    background: blue;
-    border: 1px solid lightblue;
+    background: orange;
+    border: 1px solid orangered;
 }
 
 .remove-btn {
@@ -125,6 +124,12 @@ footer {
     border: 1px solid orangered;
 }
 
+#streaming-info,
+#movie-info,
+#trailer,
+#no-movie-info {
+    display: none;
+}
 
 .scroll {
     overflow-y: auto;

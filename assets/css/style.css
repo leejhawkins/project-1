@@ -12,13 +12,9 @@ h6 {
     padding-right: 8px;
 }
 
-
 footer {
-    border-top: 2px solid greenyellow
-}
-
-footer {
-    border-top: 2px solid greenyellow
+    border-top: 2px solid greenyellow;
+    position: fixed
 }
 
 #logo {
@@ -34,6 +30,11 @@ footer {
 
 #left {
     border-right: 4px solid greenyellow;
+}
+
+#right{
+    background-image: url("../images/movie-screen.jpg");
+    background-size: cover;
 }
 
 #submit,#dropdownMenuButton {

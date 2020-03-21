@@ -55,8 +55,23 @@ footer {
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
 }
+.card-title {
+    border:none;
+    margin-right:20px;
+    float:left;
+    margin-bottom: 40px;
+
+}
 .card-img-top {
-    height: 120px;
+    height: 70px;
+}
+#streaming-services.row {
+    padding: 20px 20px;
+    width: 500px;
+}
+div.card-body.px-5 {
+
+    padding:10px;
 }
 
 #imdb-img {
@@ -66,6 +81,7 @@ footer {
 #rt-audience-img {
     max-width: 22px;
 }
+
 
 #rt-fresh-img {
     max-width: 28px;
@@ -141,16 +157,21 @@ footer {
 
 #streaming-services {
     float:left;
+    width: 580px;
 }
 
 .fa-check {
     color: green;
     font-size: 5vw;
+    position:relative;
+    left: 25px;
 }
 
 .fa-times {
     color: red;
     font-size: 5vw;
+    position: relative;
+    left: 40px;
 }
 
 #panel {

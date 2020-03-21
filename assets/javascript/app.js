@@ -20,7 +20,8 @@ $(document).ready(function() {
         $("#movie-info").css("display", "none");
         event.preventDefault();
         var movie = $("#movie-input").val().trim();
-        $("#movie-input").text("");
+        $("#movie-input").val("");
+        $("#streaming-services").empty()
         getMovieInfo(movie);
     })
 
@@ -72,23 +73,19 @@ $(document).ready(function() {
         $("#streaming-services").empty();
         for (var i=0;i<yourStreaming.length;i++) {
             var streamDiv = $('<div>')          
-            streamDiv.addClass("col-sm-6 col-md-3 col-xs-6 p-2 mx-auto stream")
+            streamDiv.addClass("card card-title")
             streamDiv.val(yourStreaming[i])
             var imgDiv = $('<div>')
-            imgDiv.addClass("img-fluid mt-1 card-img-top")
+            imgDiv.addClass("card-img-top")
             for (var j=0;j<streamingSites.length;j++) {
                 if (yourStreaming[i]===streamingSites[j].displayName) {
                     
                     imgDiv.append(streamingSites[j].image)
                     streamDiv.append(imgDiv)
-                    // console.log(streamDiv.val())
+                   
                 }
 
             }
-            
-        
-            // streamDiv.css("max-width","200px")
-            // imgDiv.css("max-width","100px","float","left")
             $('#streaming-services').append(streamDiv)
 
 
@@ -238,13 +235,13 @@ $(document).ready(function() {
         $.ajax(settings).done(function (response) {
             // console.log(response);
 
-            $("#streaming-service").empty()
+            
             for (var i=0;i<yourStreaming.length;i++) {
                 var streamDiv = $('<div>')
-                streamDiv.addClass("col-sm-6 col-md-3 col-xs-6 p-2 mx-auto stream")
+                streamDiv.addClass("card card-title")
                 streamDiv.val(yourStreaming[i])
                 var imgDiv = $('<div>')
-                imgDiv.addClass("img-fluid mt-1 card-img-top")
+                imgDiv.addClass("card-img-top")
                 for (var j=0;j<streamingSites.length;j++) {
                     if (yourStreaming[i]===streamingSites[j].displayName) {
                         imgDiv.append(streamingSites[j].image)

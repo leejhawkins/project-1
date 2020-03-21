@@ -216,7 +216,7 @@ $(document).ready(function() {
                     }
                     $("#streaming-services").append(streamDiv)
                 }
-        
+            }
            
         });
     }

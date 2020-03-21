@@ -1,60 +1,31 @@
-// var movie= ""
-// function populatePage(movieData) {
-//     var title = movieData.titles[0].title
-//     var imageURL = movieData.titles[0].image
-//     var image =$('<img>').attr("src",imageURL)
-//     image.css("height","400px")
-//     $("#movie-title").text(title)
-//     $("#movie-poster").empty()
-//     $("#movie-poster").append(image)
-
-    
-
-// }
-
-// $("#submit").on("click", function(event){
-//     event.preventDefault();
-//     movie = $("#movie-input").val().trim()
-
-// var settings = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/"+ movie ,
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com",
-// 		"x-rapidapi-key": "7b724f78f5msh2f9c6b6b67592fbp19f39ejsn86e6e6fe03ae"
-// 	}
-// }
-
-// $.ajax(settings).then(function (response) {
-//     console.log(response);
-//     populatePage(response)
-    
-// });
-// });
-
 $(document).ready(function() {
-
     var movies = JSON.parse(localStorage.getItem("movies") || "[]");
-
+    var yourStreaming = [];
+    var streamingSites = [
+        { displayName: "Netflix", image: document.images[3] },
+        { displayName: "Amazon Prime Video", image: document.images[4] },
+        { displayName: "Hulu", image: document.images[5] },
+        { displayName: "Google Play", image: document.images[6] },
+        { displayName: "iTunes", image: document.images[7] }
+    ]
     if (movies.length > 0) {
         for (var i = 0; i < movies.length; i++) {
             addFavoriteCard(movies[i].title, movies[i].poster);
         }
     }
 
-    $("#submit").on("click", function(event) {
+    $("#submit").on("click", function (event) {
         $("#no-movie-info").css("display", "none");
         $("#movie-info").css("display", "none");
         event.preventDefault();
         var movie = $("#movie-input").val().trim();
-        $("#movie-input").text("");
+        $("#movie-input").val("");
+        $("#streaming-services").empty()
         getMovieInfo(movie);
     })
 
     // Adds favorites
-    $("#fav-heart").on("click", function() {
+    $("#fav-heart").on("click", function () {
         var movieTitle = $("#movie-title").text();
         var moviePoster = $("#movie-poster").attr("src");
         function isMovieMatch(movie) {
@@ -68,12 +39,61 @@ $(document).ready(function() {
         }
     })
 
-    $("#list-favorites").on("click", ".info-btn", function() {
+    $("#list-favorites").on("click", ".info-btn", function () {
         getMovieInfo($(this).parent().parent().parent().attr("data-movie"));
     })
 
+    $("#streaming").on("click", ".form-check-input", function () {
+        var checked = $(this).val();
+        var unchecked = false;
+        
+       
+
+        if (yourStreaming==""){
+            yourStreaming.push(checked)
+            console.log(yourStreaming)
+            
+        
+        } else { 
+            for (var i=0;i<yourStreaming.length;i++) {
+                if (checked===yourStreaming[i]) {
+                    yourStreaming.splice(i,1)
+                
+                    unchecked = true
+                }
+                
+            
+            }
+            if (!unchecked) {
+            yourStreaming.push(checked)
+            }
+        }
+        console.log(yourStreaming)
+        $("#streaming-services").empty();
+        for (var i=0;i<yourStreaming.length;i++) {
+            var streamDiv = $('<div>')          
+            streamDiv.addClass("card card-title")
+            streamDiv.val(yourStreaming[i])
+            var imgDiv = $('<div>')
+            imgDiv.addClass("card-img-top")
+            for (var j=0;j<streamingSites.length;j++) {
+                if (yourStreaming[i]===streamingSites[j].displayName) {
+                    
+                    imgDiv.append(streamingSites[j].image)
+                    streamDiv.append(imgDiv)
+                   
+                }
+
+            }
+            $('#streaming-services').append(streamDiv)
+
+
+
+        }
+        
+    })
     // Removes favorites
-    $("#list-favorites").on("click", ".remove-btn", function() {
+    $("#list-favorites").on("click", ".remove-btn", function () {
         var movieTitle = $(this).parent().parent().parent().attr("data-movie");
 
         function isMovieMatch(movie) {
@@ -87,7 +107,7 @@ $(document).ready(function() {
         $(this).parent().parent().parent().remove();
     })
 
-    $(function() {
+    $(function () {
         $(window).scroll(sticktothetop);
         sticktothetop();
     });
@@ -99,15 +119,14 @@ $(document).ready(function() {
 
         $.ajax({
             url: omdbQueryURL,
-            method: "GET",
-            success: function(response) {
-                getYoutubeTrailer(movie, response.Year);
-            }
-        }).then(function(response) {
+            method: "GET"
+        }).then(function (response) {
             console.log(response);
             if (response.Error === "Movie not found!") {
                 $("#no-movie-info").css("display", "block");
             } else {
+                var imdbId = response.imdbID;
+
                 var director = response.Director;
                 $("#movie-director").text(director);
 
@@ -138,17 +157,21 @@ $(document).ready(function() {
                 var ratedIMDB = response.Ratings[0].Value;
                 $("#imdb-score").text(ratedIMDB);
 
-                var ratedRt = response.Ratings[1].Value;
-                $("#rt-aud-score").text(ratedRt);
+                console.log(response.Ratings.length)
+                if (response.Ratings.length > 1) {
+                    var ratedRt = response.Ratings[1].Value;
+                    $("#rt-aud-score").text(ratedRt);
 
-                var ratedRTF = response.Ratings[2].Value;
-                $("#rt-fresh-score").text(ratedRTF);
+                    var ratedRTF = response.Ratings[2].Value;
+                    $("#rt-fresh-score").text(ratedRTF);
+                }
+
                 $("#movie-info").css("display", "block");
                 $("#streaming-info").css("display", "block");
                 $("#trailer").css("display", "block");
 
-                getStreamingInfo(movie);
-
+                getStreamingInfo(imdbId);
+                getYoutubeTrailer(movie, released)
             }
         })
     }
@@ -157,7 +180,7 @@ $(document).ready(function() {
     function addFavoriteCard(title, poster) {
         var favoriteCard = $("<div>")
             .addClass("card favorite-card")
-            .attr("data-movie", title); 
+            .attr("data-movie", title);
         var cardBody = $("<div>").addClass("card-body fav-buttons-below");
         var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
         buttonsDiv.append(($("<button>")
@@ -178,14 +201,13 @@ $(document).ready(function() {
 
     // Youtube API Use
     function getYoutubeTrailer(movie, year) {
-         
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + movie + " " + year + " trailer&key=AIzaSyAUcvPuQEmB09VvUcwZNUfhtnQ0dt7ilhI";
-        
+
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + movie + " " + year + " trailer&key=AIzaSyBsq4LWKWMsq_V4wbDbc8K3zXz7EJyRbG4";
+
         $.ajax({
             url: youtubeQueryURL,
             method: "GET"
-        }).then(function(response) {
-            console.log(response);
+        }).then(function (response) {
             $("#trailer").empty();
             var trailer = $("<iframe>").addClass("embed-responsive-item pr-3");
             trailer.attr("src", "https://www.youtube.com/embed/" + response.items[0].id.videoId);
@@ -194,56 +216,81 @@ $(document).ready(function() {
     }
 
     // Streaming the movie 
-    function getStreamingInfo(movie) {
+    function getStreamingInfo(imdbId) {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=bojack&country=United%20States",
+
+            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id="+imdbId+"&source=imdb",
+
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
                 "x-rapidapi-key": "5ab9c085a4mshd943485782db908p11fe0djsn292b49c261e6"
             }
         }
-        
+
         $.ajax(settings).done(function (response) {
-            console.log(response);
-        
-            var streamingSites = [
-                { displayName: "Amazon Prime", idRoot: "#amazon-prime-" },
-                { displayName: "Netflix", idRoot: "#netflix-" },
-                { displayName: "Disney+", idRoot: "#disney+-" },
-                { displayName: "Hulu", idRoot: "#hulu-" }
-            ]
+            // console.log(response);
 
-            for (var i = 0; i < streamingSites.length; i++) {
-                var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
-                $(streamingSites[i].idRoot + "button").empty();
-                $(streamingSites[i].idRoot + "available").empty();
-                $(streamingSites[i].idRoot + "available").append(iconX);
-            }
+            
+            for (var i=0;i<yourStreaming.length;i++) {
+                var streamDiv = $('<div>')
+                streamDiv.addClass("card card-title")
+                streamDiv.val(yourStreaming[i])
+                var imgDiv = $('<div>')
+                imgDiv.addClass("card-img-top")
+                for (var j=0;j<streamingSites.length;j++) {
+                    if (yourStreaming[i]===streamingSites[j].displayName) {
+                        imgDiv.append(streamingSites[j].image)
+                        streamDiv.append(imgDiv)
+                        var canStream = false;
+                        for (var k=0;k<response.collection.locations.length;k++) {
+                            if (response.collection.locations[k].display_name === yourStreaming[i]) {
+                                var icon = $("<i>").attr("class", "fas fa-check fa-2x");
+                                var streamButton = $("<a>").attr("href", response.collection.locations[k].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
+                                
+                                streamDiv.append(icon);
+                                streamDiv.append(streamButton);
+                                canStream = true
+                                console.log(canStream)
 
-            for (var i = 0; i < response.results[0].locations.length; i++) {
-                console.log(response.results[0].locations[i].display_name);
-                for (var j = 0; j < streamingSites.length; j++) {
-                    if (response.results[0].locations[i].display_name === streamingSites[j].displayName) {
-                        var icon = $("<i>").attr("class", "fas fa-check fa-2x");
-                        var streamButton = $("<a>").attr("href", response.results[0].locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
-                        $(streamingSites[j].idRoot + "available").empty();
-                        $(streamingSites[j].idRoot + "available").append(icon);
-                        $(streamingSites[j].idRoot + "button").empty();
-                        $(streamingSites[j].idRoot + "button").append(streamButton);
+                            } else if (k===response.collection.locations.length-1 && !canStream) {
+                               
+                                var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
+                                streamDiv.append(iconX)
+                                
+                            }
+                        }
                     }
+                    $("#streaming-services").append(streamDiv)
+    
                 }
+
             }
+            // for (var i = 0; i < response.collection.locations.length; i++) {
+            //     console.log(response.collection.locations[i].display_name);
+            //     for (var j = 0; j < yourStreaming.length; j++) {
+            //         if (response.collection.locations[i].display_name === yourStreaming[j]) {
+            //             var icon = $("<i>").attr("class", "fas fa-check fa-2x");
+            //             var streamButton = $("<a>").attr("href", response.collection.locations[i].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
+            //             $(streamingSites[j].idRoot + "available").empty();
+            //             $(streamingSites[j].idRoot + "available").append(icon);
+            //             $(streamingSites[j].idRoot + "button").empty();
+            //             $(streamingSites[j].idRoot + "button").append(streamButton);
+            //         }
+            //     }
+            // }
         });
     }
     // List-favorites div
     function addFavoriteCard(title, poster) {
         var favoriteCard = $("<div>")
             .addClass("card favorite-card")
-            .attr("data-movie", title); 
+
+            .attr("data-movie", title);
+
         var cardBody = $("<div>").addClass("card-body fav-buttons-below");
         var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
         buttonsDiv.append(($("<button>")

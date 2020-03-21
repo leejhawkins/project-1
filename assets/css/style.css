@@ -1,5 +1,5 @@
 body {
-    
+    background-color: darkgrey;
     font-family: 'Acme', sans-serif;
 }
 
@@ -12,13 +12,8 @@ h6 {
     padding-right: 8px;
 }
 
-
 footer {
-    border-top: 2px solid greenyellow
-}
-
-footer {
-    border-top: 2px solid greenyellow
+    border-top: 2px solid greenyellow;
 }
 
 #logo {
@@ -27,8 +22,7 @@ footer {
 }
 
 #search-icon,
-#stream-icon,
-#popcorn-icon {
+#stream-icon {
     max-width: 125px;
     width: 100%;
 }
@@ -37,12 +31,17 @@ footer {
     border-right: 4px solid greenyellow;
 }
 
-#submit {
+#right{
+    background-image: url("../images/movie-screen.jpg");
+    background-size: cover;
+}
+
+#submit,#dropdownMenuButton {
     background: blue;
     border: 1px solid green;
 }
 
-#submit:hover {
+#submit:hover,#dropdownMenuButton:hover {
     background: orange;
     border: 1px solid orangered;
 }
@@ -127,8 +126,8 @@ div.card-body.px-5 {
 }
 
 .info-btn:hover {
-    background: blue;
-    border: 1px solid lightblue;
+    background: orange;
+    border: 1px solid orangered;
 }
 
 .remove-btn {
@@ -141,6 +140,12 @@ div.card-body.px-5 {
     border: 1px solid orangered;
 }
 
+#streaming-info,
+#movie-info,
+#trailer,
+#no-movie-info {
+    display: none;
+}
 
 .scroll {
     overflow-y: auto;

@@ -1,7 +1,7 @@
-$(document).ready(function() {
-   
+$(document).ready(function () {
+
     var movies = JSON.parse(localStorage.getItem("movies") || "[]");
-    var yourStreaming = [];
+    var yourStreaming = JSON.parse(localStorage.getItem("streaming") || "[]");
     var streamingSites = [
         { displayName: "Netflix", image: document.images[0] },
         { displayName: "Amazon Prime Video", image: document.images[1] },
@@ -14,6 +14,21 @@ $(document).ready(function() {
         for (var i = 0; i < movies.length; i++) {
             addFavoriteCard(movies[i].title, movies[i].poster);
         }
+    }
+    if (yourStreaming.length > 0) {
+        
+        populateStreaming(yourStreaming);
+        for (var i=0;i<yourStreaming.length;i++) {
+            console.log(yourStreaming[i])
+            for (var j=0;j<streamingSites.length;j++) {
+                if (yourStreaming[i] === streamingSites[j].displayName) {
+                    var buttonId=yourStreaming[i].replace(/\s+/g, '-').toLowerCase()
+                    $("#"+buttonId).prop("checked", true);
+                    console.log(buttonId)
+                }
+            }
+        }
+
     }
 
     $("#submit").on("click", function (event) {
@@ -154,12 +169,12 @@ $(document).ready(function() {
     // Youtube API Use
     function getYoutubeTrailer(imdbId) {
 
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" +imdbId +" trailer&key=AIzaSyC_VBnzUWZnu_i1CYl1oqzpytR8vnFNrkY";
-        
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + imdbId + " trailer&key=AIzaSyC_VBnzUWZnu_i1CYl1oqzpytR8vnFNrkY";
+
         $.ajax({
             url: youtubeQueryURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response);
             $("#trailer").empty();
             var trailer = $("<iframe>").addClass("embed-responsive-item pr-3");
@@ -175,7 +190,7 @@ $(document).ready(function() {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id="+imdbId+"&source=imdb",
+            "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id=" + imdbId + "&source=imdb",
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
@@ -186,19 +201,19 @@ $(document).ready(function() {
         $.ajax(settings).done(function (response) {
             console.log(response);
 
-            for (var i=0;i<yourStreaming.length;i++) {
+            for (var i = 0; i < yourStreaming.length; i++) {
                 var streamDiv = $('<div>')
                 streamDiv.addClass("card card-title col-xs-6")
                 streamDiv.val(yourStreaming[i])
                 var imgDiv = $('<div>')
                 imgDiv.addClass("card-img-top")
-                for (var j=0;j<streamingSites.length;j++) {
-                    if (yourStreaming[i]===streamingSites[j].displayName) {
+                for (var j = 0; j < streamingSites.length; j++) {
+                    if (yourStreaming[i] === streamingSites[j].displayName) {
                         imgDiv.append(streamingSites[j].image)
                         streamDiv.append(imgDiv)
                         var canStream = false;
-                        
-                        for (var k=0;k<response.collection.locations.length;k++) {
+
+                        for (var k = 0; k < response.collection.locations.length; k++) {
                             if (response.collection.locations[k].display_name === yourStreaming[i]) {
                                 var icon = $("<i>").attr("class", "fas fa-check fa-2x");
                                 var streamButton = $("<a>").attr("href", response.collection.locations[k].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
@@ -206,8 +221,8 @@ $(document).ready(function() {
                                 streamDiv.append(streamButton);
                                 canStream = true
                                 console.log(canStream)
-                            } 
-                            else if (k===response.collection.locations.length-1 && !canStream) {
+                            }
+                            else if (k === response.collection.locations.length - 1 && !canStream) {
                                 var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
                                 streamDiv.append(iconX)
                             }
@@ -222,34 +237,38 @@ $(document).ready(function() {
     $("#streaming").on("click", ".form-check-input", function () {
 
         var checked = $(this).val();
+        
         var unchecked = false;
-    
-        if (yourStreaming==""){
+
+        if (yourStreaming == "") {
             yourStreaming.push(checked)
-            console.log(yourStreaming)  
-        } 
-        else { 
-            for (var i=0;i<yourStreaming.length;i++) {
-                if (checked===yourStreaming[i]) {
-                    yourStreaming.splice(i,1)
+            console.log(yourStreaming)
+        }
+        else {
+            for (var i = 0; i < yourStreaming.length; i++) {
+                if (checked === yourStreaming[i]) {
+                    yourStreaming.splice(i, 1)
                     unchecked = true
                 }
             }
             if (!unchecked) {
-            yourStreaming.push(checked)
+                yourStreaming.push(checked)
             }
         }
-        console.log(yourStreaming)
+        localStorage.setItem("streaming", JSON.stringify(yourStreaming))
+        populateStreaming(yourStreaming)
+    })
+    function populateStreaming() {
         $("#streaming-services").empty();
-        for (var i=0;i<yourStreaming.length;i++) {
-            var streamDiv = $('<div>')          
+        for (var i = 0; i < yourStreaming.length; i++) {
+            var streamDiv = $('<div>')
             streamDiv.addClass("card card-title")
             streamDiv.val(yourStreaming[i])
             var imgDiv = $('<div>')
             imgDiv.addClass("card-img-top")
-            for (var j=0;j<streamingSites.length;j++) {
-                if (yourStreaming[i]===streamingSites[j].displayName) {
-                    var iconSearch=$("<i>").attr("class", "fas fa-search fa-2x")
+            for (var j = 0; j < streamingSites.length; j++) {
+                if (yourStreaming[i] === streamingSites[j].displayName) {
+                    var iconSearch = $("<i>").attr("class", "fas fa-search fa-2x")
                     imgDiv.append(streamingSites[j].image)
                     streamDiv.append(imgDiv)
                     streamDiv.append(iconSearch)
@@ -257,7 +276,7 @@ $(document).ready(function() {
             }
             $('#streaming-services').append(streamDiv)
         }
-    })
+    }
     // List-favorites div
     function addFavoriteCard(title, poster) {
         var favoriteCard = $("<div>")

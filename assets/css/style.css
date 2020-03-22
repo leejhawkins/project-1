@@ -60,13 +60,13 @@ footer {
 }
 .card-title {
     border:none;
-    margin-right:20px;
+    margin-right:10px;
     float:left;
     margin-bottom: 40px;
 
 }
 .card-img-top {
-    height: 70px;
+    height: 40px;
 }
 #streaming-services.row {
     padding: 20px 20px;
@@ -159,22 +159,30 @@ div.card-body.px-5 {
 }
 
 #streaming-services {
-    float:left;
-    width: 580px;
+   position: relative;
+   right: 50px;
 }
 
-.fa-check {
+.fa-check.fa-2x {
     color: green;
-    font-size: 5vw;
+    font-size: 2vw;
     position:relative;
-    left: 25px;
+    left: 15px;
 }
 
-.fa-times {
+.fa-times.fa-2x {
     color: red;
-    font-size: 5vw;
+    font-size: 2vw;
     position: relative;
-    left: 40px;
+    left: 20px;
+}
+
+.fa-search.fa-2x {
+    color:yellow;
+    font-size: 2vw;
+    position: relative;
+    left: 20px;
+    top: 5px;
 }
 
 #panel {

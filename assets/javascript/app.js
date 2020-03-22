@@ -249,8 +249,10 @@ $(document).ready(function() {
             imgDiv.addClass("card-img-top")
             for (var j=0;j<streamingSites.length;j++) {
                 if (yourStreaming[i]===streamingSites[j].displayName) {
+                    var iconSearch=$("<i>").attr("class", "fas fa-search fa-2x")
                     imgDiv.append(streamingSites[j].image)
                     streamDiv.append(imgDiv)
+                    streamDiv.append(iconSearch)
                 }
             }
             $('#streaming-services').append(streamDiv)

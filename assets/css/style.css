@@ -59,15 +59,17 @@ footer {
     border:none;
     margin-right:10px;
     float:left;
-    margin-bottom: 40px;
 
 }
 .card-img-top {
     height: 40px;
 }
 #streaming-services.row {
-    padding: 20px 20px;
     width: 500px;
+    height: 120px;
+    border: solid 2px grey;
+    border-radius: 10px;
+    padding-top: 5px;
 }
 div.card-body.px-5 {
 

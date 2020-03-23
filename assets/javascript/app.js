@@ -12,19 +12,25 @@ $(document).ready(function () {
     ]
     if (movies.length > 0) {
         for (var i = 0; i < movies.length; i++) {
-            addFavoriteCard(movies[i].title, movies[i].poster);
+            var streamingLocations = movies[i].locations
+            var streamingLocationsLength = movies[i].locationNum
+            var streamingLocationsArray = streamingLocations.split(",", streamingLocationsLength)
+    
+            var streamingURLs = movies[i].urls
+            var streamingURLsLength = movies[i].urlsNum
+            var streamingURLsArray = streamingURLs.split(",", streamingURLsLength)
+            console.log(movies[i].locations)
+            addFavoriteCard(movies[i].title, movies[i].poster, streamingLocationsArray,streamingURLsArray);
         }
     }
     if (yourStreaming.length > 0) {
-        
+
         populateStreaming(yourStreaming);
-        for (var i=0;i<yourStreaming.length;i++) {
-            console.log(yourStreaming[i])
-            for (var j=0;j<streamingSites.length;j++) {
+        for (var i = 0; i < yourStreaming.length; i++) {
+            for (var j = 0; j < streamingSites.length; j++) {
                 if (yourStreaming[i] === streamingSites[j].displayName) {
-                    var buttonId=yourStreaming[i].replace(/\s+/g, '-').toLowerCase()
-                    $("#"+buttonId).prop("checked", true);
-                    console.log(buttonId)
+                    var buttonId = yourStreaming[i].replace(/\s+/g, '-').toLowerCase()
+                    $("#" + buttonId).prop("checked", true);
                 }
             }
         }
@@ -45,14 +51,24 @@ $(document).ready(function () {
     $("#fav-heart").on("click", function () {
         var movieTitle = $("#movie-title").text();
         var moviePoster = $("#movie-poster").attr("src");
+
+        var streamingLocations = ($("#movie-poster").attr("data-locations"))
+        var streamingLocationsLength = ($("#movie-poster")).attr("data-locations-length")
+        var streamingLocationsArray = streamingLocations.split(",", streamingLocationsLength)
+
+        var streamingURLs = ($("#streaming-services").attr("data-urls"))
+        var streamingURLsLength = ($("#streaming-services")).attr("data-urls-length")
+        var streamingURLsArray = streamingURLs.split(",", streamingURLsLength)
+        console.log(streamingLocationsArray)
+        console.log(streamingURLsArray)
         function isMovieMatch(movie) {
             return movie.title === movieTitle && movie.poster === moviePoster;
         }
 
         if (movies.findIndex(isMovieMatch) == -1) {
-            movies.push({ poster: moviePoster, title: movieTitle });
+            movies.push({ poster: moviePoster, title: movieTitle, locations: streamingLocations, locationNum: streamingLocationsLength,urls: streamingURLs,urlsNum:streamingLocationsLength });
             localStorage.setItem("movies", JSON.stringify(movies));
-            addFavoriteCard($("#movie-title").text(), $("#movie-poster").attr("src"));
+            addFavoriteCard(movieTitle, $("#movie-poster").attr("src"),streamingLocationsArray,streamingURLsArray);
         }
     })
 
@@ -62,8 +78,8 @@ $(document).ready(function () {
 
     // Removes favorites
     $("#list-favorites").on("click", ".remove-btn", function () {
-        var movieTitle = $(this).parent().parent().parent().attr("data-movie");
-
+        var movieTitle = $(this).parent().parent().parent().parent().attr("data-movie");
+        console.log(movieTitle)
         function isMovieMatch(movie) {
             return movie.title === movieTitle;
         }
@@ -72,7 +88,7 @@ $(document).ready(function () {
             movies.splice(movieIndex, 1);
         }
         localStorage.setItem("movies", JSON.stringify(movies));
-        $(this).parent().parent().parent().remove();
+        $(this).parent().parent().parent().parent().remove();
     })
 
     $(function () {
@@ -88,7 +104,7 @@ $(document).ready(function () {
             url: omdbQueryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            
             if (response.Error === "Movie not found!") {
                 $("#no-movie-info").css("display", "block");
             } else {
@@ -124,7 +140,7 @@ $(document).ready(function () {
                 var ratedIMDB = response.Ratings[0].Value;
                 $("#imdb-score").text(ratedIMDB);
 
-                console.log(response.Ratings.length)
+               
                 if (response.Ratings.length > 1) {
                     var ratedRt = response.Ratings[1].Value;
                     $("#rt-aud-score").text(ratedRt);
@@ -134,7 +150,7 @@ $(document).ready(function () {
                 }
 
                 $("#movie-info").css("display", "block");
-                $("#streaming-info").css("display", "block");
+                $("#streaming-i nfo").css("display", "block");
                 $("#trailer").css("display", "block");
 
                 getStreamingInfo(imdbId);
@@ -144,25 +160,49 @@ $(document).ready(function () {
     }
 
     // Adds movie card to favorites div
-    function addFavoriteCard(title, poster) {
+    function addFavoriteCard(title, poster,locations,urls) {
+        console.log(locations)
         var favoriteCard = $("<div>")
-            .addClass("card favorite-card")
+            .addClass("card")
             .attr("data-movie", title);
-        var cardBody = $("<div>").addClass("card-body fav-buttons-below");
-        var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
-        buttonsDiv.append(($("<button>")
-            .attr("type", "button")
-            .addClass("btn btn-secondary btn-sm btn-success info-btn")
-            .text("Info")));
+        var favoriteRow= ($("<div>").addClass("row"))
+        var cardBody = $("<div>").addClass("col-md-5 fav-streaming");
+        var buttonsDiv = $("<div>").addClass("btn-group");
+        for (var i=0;i<yourStreaming.length;i++) {
+            var streamSpan = $("<div>").html(yourStreaming[i])
+            var canStream = false
+            
+            for (var j=0;j<locations.length;j++) {
+                
+                if (yourStreaming[i]===locations[j]) {
+                   
+                    var streamButton = $("<a>").attr("href",urls[j]).attr("class", "badge badge-success").attr("target", "_blank").text("Watch") 
+                    streamButton.css("font-size","8px")
+                    streamButton.css("float","right")
+                    streamSpan.append(streamButton)
+                    canStream = true
+                } else if (j === locations.length - 1 && !canStream) {
+                    var iconX = $("<i>").attr("class", "fas fa-times");
+                    iconX.css("font-size","1vw")
+                    iconX.css("color","red")
+                    iconX.css("float","right")
+                    streamSpan.append(iconX)
+                }
+
+            }
+            cardBody.append(streamSpan)
+            
+        } 
         buttonsDiv.append(($("<button>")
             .attr("type", "button")
             .addClass("btn btn-secondary btn-sm btn-danger remove-btn")
             .text("Remove")));
         cardBody.append(buttonsDiv);
-        favoriteCard.append(($("<img>")
+        favoriteRow.append(($("<img>")
             .attr("src", poster)
-            .addClass("card-img-top fav-img")));
-        favoriteCard.append(cardBody);
+            .addClass("col-md-4 fav-img")));
+        favoriteRow.append(cardBody)
+        favoriteCard.append(favoriteRow);
         $("#list-favorites").append(favoriteCard);
     }
 
@@ -175,7 +215,7 @@ $(document).ready(function () {
             url: youtubeQueryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             $("#trailer").empty();
             var trailer = $("<iframe>").addClass("embed-responsive-item pr-3");
             trailer.attr("src", "https://www.youtube.com/embed/" + response.items[0].id.videoId);
@@ -199,7 +239,13 @@ $(document).ready(function () {
         }
 
         $.ajax(settings).done(function (response) {
-            console.log(response);
+            // console.log(response);
+            var streamingLocations = [];
+            var streamingURLs = [];
+            for (var i=0;i<response.collection.locations.length;i++) {
+                streamingLocations.push(response.collection.locations[i].display_name)
+                streamingURLs.push(response.collection.locations[i].url)
+            }
 
             for (var i = 0; i < yourStreaming.length; i++) {
                 var streamDiv = $('<div>')
@@ -207,20 +253,23 @@ $(document).ready(function () {
                 streamDiv.val(yourStreaming[i])
                 var imgDiv = $('<div>')
                 imgDiv.addClass("card-img-top")
+        
                 for (var j = 0; j < streamingSites.length; j++) {
                     if (yourStreaming[i] === streamingSites[j].displayName) {
                         imgDiv.append(streamingSites[j].image)
                         streamDiv.append(imgDiv)
                         var canStream = false;
+                       
 
                         for (var k = 0; k < response.collection.locations.length; k++) {
+                           
                             if (response.collection.locations[k].display_name === yourStreaming[i]) {
                                 var icon = $("<i>").attr("class", "fas fa-check fa-2x");
                                 var streamButton = $("<a>").attr("href", response.collection.locations[k].url).attr("class", "button btn btn-success btn-sm btn-block my-1").attr("target", "_blank").text("Watch")
                                 streamDiv.append(icon);
                                 streamDiv.append(streamButton);
                                 canStream = true
-                                console.log(canStream)
+
                             }
                             else if (k === response.collection.locations.length - 1 && !canStream) {
                                 var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
@@ -230,14 +279,21 @@ $(document).ready(function () {
                     }
                     $("#streaming-services").append(streamDiv)
                 }
+               
             }
+            // console.log(streamingURLs)
+            // console.log(streamingLocations)
+            $("#movie-poster").attr("data-locations", streamingLocations)
+            $("#movie-poster").attr("data-locations-length", streamingLocations.length)
+            $("#streaming-services").attr("data-urls", streamingURLs)
+            $("#streaming-services").attr("data-urls-length", streamingURLs.length)
         });
     }
 
     $("#streaming").on("click", ".form-check-input", function () {
 
         var checked = $(this).val();
-        
+
         var unchecked = false;
 
         if (yourStreaming == "") {
@@ -275,32 +331,33 @@ $(document).ready(function () {
                 }
             }
             $('#streaming-services').append(streamDiv)
+
         }
     }
     // List-favorites div
-    function addFavoriteCard(title, poster) {
-        var favoriteCard = $("<div>")
-            .addClass("card favorite-card")
+    // function addFavoriteCard(title, poster) {
+    //     var favoriteCard = $("<div>")
+    //         .addClass("card favorite-card")
 
-            .attr("data-movie", title);
+    //         .attr("data-movie", title);
 
-        var cardBody = $("<div>").addClass("card-body fav-buttons-below");
-        var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
-        buttonsDiv.append(($("<button>")
-            .attr("type", "button")
-            .addClass("btn btn-secondary btn-sm btn-success info-btn")
-            .text("Info")));
-        buttonsDiv.append(($("<button>")
-            .attr("type", "button")
-            .addClass("btn btn-secondary btn-sm btn-danger remove-btn")
-            .text("Remove")));
-        cardBody.append(buttonsDiv);
-        favoriteCard.append(($("<img>")
-            .attr("src", poster)
-            .addClass("card-img-top fav-img")));
-        favoriteCard.append(cardBody);
-        $("#list-favorites").append(favoriteCard);
-    }
+    //     var cardBody = $("<div>").addClass("card-body fav-buttons-below");
+    //     var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
+    //     buttonsDiv.append(($("<button>")
+    //         .attr("type", "button")
+    //         .addClass("btn btn-secondary btn-sm btn-success info-btn")
+    //         .text("Info")));
+    //     buttonsDiv.append(($("<button>")
+    //         .attr("type", "button")
+    //         .addClass("btn btn-secondary btn-sm btn-danger remove-btn")
+    //         .text("Remove")));
+    //     cardBody.append(buttonsDiv);
+    //     favoriteCard.append(($("<img>")
+    //         .attr("src", poster)
+    //         .addClass("card-img-top fav-img")));
+    //     favoriteCard.append(cardBody);
+    //     $("#list-favorites").append(favoriteCard);
+    // }
 
     function sticktothetop() {
         var window_top = $(window).scrollTop();

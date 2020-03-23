@@ -11,6 +11,10 @@ h6 {
     padding-right: 8px;
 }
 
+h3,p{
+    color:white;
+}
+
 .container-fluid{
     padding: 0px;
 }
@@ -32,6 +36,7 @@ footer {
 
 #left {
     border-right: 4px solid rgb(47, 161, 255);
+    background-image: url("../images/dark-honeycomb.png");
 }
 
 #right{

@@ -50,7 +50,7 @@ footer {
 }
 
 #submit:hover,#dropdownMenuButton:hover {
-    background: rgba(28, 2, 170, 0.685);
+    background: rgba(27, 2, 170, 0.459);
     border: 1px solid rgb(0, 119, 255);
 }
 

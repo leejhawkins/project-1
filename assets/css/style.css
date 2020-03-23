@@ -16,7 +16,7 @@ h6 {
 }
 
 footer {
-    border-top: 2px solid greenyellow;
+    border-top: 2px solid rgb(47, 161, 255);
 }
 
 #logo {
@@ -31,7 +31,7 @@ footer {
 }
 
 #left {
-    border-right: 4px solid greenyellow;
+    border-right: 4px solid rgb(47, 161, 255);
 }
 
 #right{
@@ -40,13 +40,13 @@ footer {
 }
 
 #submit,#dropdownMenuButton {
-    background: blue;
-    border: 1px solid green;
+    background: rgb(0, 132, 255);
+    border: 1px solid rgb(77, 0, 128);
 }
 
 #submit:hover,#dropdownMenuButton:hover {
-    background: orange;
-    border: 1px solid orangered;
+    background: rgba(28, 2, 170, 0.685);
+    border: 1px solid rgb(0, 119, 255);
 }
 
 #stickThis.stick {
@@ -68,9 +68,9 @@ footer {
     height: 40px;
 }
 #streaming-services.row {
-    width: 500px;
+    /* width: 500px; */
     height: 120px;
-    border: solid 2px grey;
+    /* border: solid 2px grey; */
     border-radius: 10px;
     padding-top: 5px;
 }
@@ -126,23 +126,23 @@ div.card-body.px-5 {
 }
 
 .info-btn {
-    background: blue;
-    border: 1px solid green;
+    background: rgb(0, 132, 255);
+    border: 1px solid rgb(77, 0, 128);
 }
 
 .info-btn:hover {
-    background: orange;
-    border: 1px solid orangered;
+    background: rgba(28, 2, 170, 0.685);
+    border: 1px solid rgb(0, 119, 255);
 }
 
 .remove-btn {
-    background: blue;
-    border: 1px solid lightblue;
+    background: rgb(0, 132, 255);
+    border: 1px solid rgb(77, 0, 128);
 }
 
 .remove-btn:hover {
-    background: orange;
-    border: 1px solid orangered;
+    background: rgba(28, 2, 170, 0.685);
+    border: 1px solid rgb(0, 119, 255);
 }
 
 #streaming-info,
@@ -212,12 +212,12 @@ div.card-body.px-5 {
 }
 
 .details {
-    color: darkblue;
+    color: darkrgb(0, 132, 255);
 }
 
 a {
     text-decoration: none;
-    color: blueviolet;
+    color: rgb(0, 132, 255)violet;
 }
 
 @media screen and (min-width: 1200px) {
@@ -229,7 +229,7 @@ a {
 
 @media screen and (max-width: 992px) {
     #left {
-        border-bottom: 4px solid greenyellow;
+        border-bottom: 4px solid rgb(47, 161, 255);
         border-right: none;
     }
     #stickThis.stick {

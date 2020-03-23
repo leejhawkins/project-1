@@ -119,15 +119,18 @@ div.card-body.px-5 {
     padding: 0;
 }
 
-.favorite-card {
+/* .favorite-card {
     width: 145px;
     float: left;
     margin: 4px 4px;
-}
+} */
 
 .fav-img {
     height: 210px;
-    width: auto;
+    width: 33%;
+}
+.fav-streaming {
+    padding-left: 0px;
 }
 
 .info-btn {

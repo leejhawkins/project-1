@@ -8,15 +8,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Acme|Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Movie Search Database</title>
 </head>
@@ -40,22 +32,22 @@
                         <div class="col-12 mt-5 mb-4"><img class="img-fluid " src="assets/images/Movie-Logo.png"
                                 alt="Movie Logo" id="logo"></div>
                         <div class="col-2 my-2"></div>
-                        <div class="col-4 my-4"><img class="img-fluid" src="assets/images/search.png" alt="Search Icon"
-                                id="search-icon">
-                            <p>Search for <br> Movie Information</p>
-                        </div>
                         <div class="col-4 my-4"><img class="img-fluid" src="assets/images/stream.png" alt="Stream Icon"
                                 id="stream-icon">
-                            <p>See Where <br> To Stream It</p>
+                            <p>Pick Your <br> Streaming Plaforms</p>
+                        </div>
+                        <div class="col-4 my-4"><img class="img-fluid" src="assets/images/search.png" alt="Search Icon"
+                                id="search-icon">
+                            <p>Search for <br> Your Movie! </p>
                         </div>
                     </div>
 
                     <!-- Used For Sticky Search -->
                     <div id="stick-here"></div>
                     <div id="stickThis"></div>
-                    
-                     <!-- Movie Search Form -->
-                     <form class="mx-5 sidebar-item">
+
+                    <!-- Movie Search Form -->
+                    <form class="mx-5 sidebar-item">
                         <div class="form-row mt-5 ">
                             <label for="movie-input">
                                 <h3><i class="fas fa-film"></i> Movie Search</h3>
@@ -63,75 +55,70 @@
                             <input type="" class="form-control shadow" id="movie-input"
                                 placeholder="Enter Movie Search">
                         </div>
+
+                        <!-- Movie Search Button -->
                         <button type="submit" class="btn btn-primary btn-block mt-3 mb-5" id="submit"><i
                                 class="fas fa-search"></i>
                             SearchMovie
                         </button>
-                    </form>
-                    <!-- Streaming Info -->
-                    <div class="card border-0 mr-2">
-                        <h5 class="card-header bg-white border-bottom" style="text-align:center"><i
-                                class="far fa-eye"></i>
-                            Your Streaming Services</h5>
-                        <div class="card-body px-5">
 
-                            <div class="container-fluid">
-                                <div class="row justify-content-md-center ml-0" id="streaming-services">
+                        <!-- Streaming Button -->
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-block mt-3 mb-5 dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Streaming Services
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="streaming">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Netflix" id="netflix">
+                                    <label class="form-check-label" for="netflix">
+                                        Netflix
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Amazon Prime Video"
+                                        id="amazon-prime">
+                                    <label class="form-check-label" for="amazon-prime">
+                                        Amazon Prime
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Hulu" id="hulu">
+                                    <label class="form-check-label" for="hulu">
+                                        Hulu
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Google Play"
+                                        id="google-play">
+                                    <label class="form-check-label" for="google-play">
+                                        Google Play
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="iTunes" id="itunes">
+                                    <label class="form-check-label" for="itunes">
+                                        Itunes
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="HBO" id="HBO">
+                                    <label class="form-check-label" for="HBO">
+                                        HBO
+                                    </label>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-block mt-3 mb-5 dropdown-toggle" type="button"
-                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Streaming Services
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="streaming">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Netflix" id="netflix">
-                                <label class="form-check-label" for="netflix">
-                                    Netflix
-                                </label>
+                    </form>
 
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Amazon Prime Video"
-                                    id="amazon-prime">
-                                <label class="form-check-label" for="amazon-prime">
-                                    Amazon Prime
-                                </label>
 
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Hulu" id="hulu">
-                                <label class="form-check-label" for="hulu">
-                                    Hulu
-                                </label>
-
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Google Play" id="google-play">
-                                <label class="form-check-label" for="google-play">
-                                    Google Play
-                                </label>
-
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="iTunes" id="itunes">
-                                <label class="form-check-label" for="itunes">
-                                    Itunes
-                                </label>
-
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="HBO" id="HBO">
-                                <label class="form-check-label" for="HBO">
-                                    HBO
-                                </label>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Favorite Section -->
                 <div>
@@ -237,6 +224,20 @@
                         </div>
 
                         <br>
+                        <!-- Streaming Info -->
+                        <div class="card border-0 mr-2">
+                            <h5 class="card-header bg-white border-bottom" style="text-align:center"><i
+                                    class="far fa-eye"></i>
+                                Your Streaming Services</h5>
+                            <div class="card-body px-5">
+
+                                <div class="container-fluid">
+                                    <div class="row justify-content-md-center ml-0" id="streaming-services">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- Trailer Section -->
                     <div class="embed-responsive embed-responsive-16by9  mt-2 rounded" id="trailer">
@@ -254,8 +255,18 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 </body>
 
-</html>
+</html

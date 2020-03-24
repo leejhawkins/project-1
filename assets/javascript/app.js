@@ -124,7 +124,7 @@ $(document).ready(function () {
 
                 var plot = response.Plot;
                 $("#movie-plot").text(plot);
-
+                console.log(plot)
                 var imgURL = response.Poster;
                 $("#movie-poster").attr("src", imgURL);
 
@@ -239,7 +239,7 @@ $(document).ready(function () {
         }
 
         $.ajax(settings).done(function (response) {
-            // console.log(response);
+            
             var streamingLocations = [];
             var streamingURLs = [];
             for (var i=0;i<response.collection.locations.length;i++) {

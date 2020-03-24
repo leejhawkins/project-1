@@ -34,7 +34,6 @@ $(document).ready(function () {
                 }
             }
         }
-
     }
 
     $("#submit").on("click", function (event) {
@@ -51,11 +50,9 @@ $(document).ready(function () {
     $("#fav-heart").on("click", function () {
         var movieTitle = $("#movie-title").text();
         var moviePoster = $("#movie-poster").attr("src");
-
         var streamingLocations = ($("#movie-poster").attr("data-locations"))
         var streamingLocationsLength = ($("#movie-poster")).attr("data-locations-length")
         var streamingLocationsArray = streamingLocations.split(",", streamingLocationsLength)
-
         var streamingURLs = ($("#streaming-services").attr("data-urls"))
         var streamingURLsLength = ($("#streaming-services")).attr("data-urls-length")
         var streamingURLsArray = streamingURLs.split(",", streamingURLsLength)
@@ -95,6 +92,7 @@ $(document).ready(function () {
         $(window).scroll(sticktothetop);
         sticktothetop();
     });
+
     //OMDB API Use
     function getMovieInfo(movie) {
 
@@ -188,10 +186,8 @@ $(document).ready(function () {
                     iconX.css("float","right")
                     streamSpan.append(iconX)
                 }
-
             }
             cardBody.append(streamSpan)
-            
         } 
         buttonsDiv.append(($("<button>")
             .attr("type", "button")
@@ -222,7 +218,6 @@ $(document).ready(function () {
             $("#trailer").append(trailer);
         });
     }
-
 
     // Streaming the movie 
     function getStreamingInfo(imdbId) {
@@ -260,7 +255,6 @@ $(document).ready(function () {
                         streamDiv.append(imgDiv)
                         var canStream = false;
                        
-
                         for (var k = 0; k < response.collection.locations.length; k++) {
                            
                             if (response.collection.locations[k].display_name === yourStreaming[i]) {
@@ -269,7 +263,6 @@ $(document).ready(function () {
                                 streamDiv.append(icon);
                                 streamDiv.append(streamButton);
                                 canStream = true
-
                             }
                             else if (k === response.collection.locations.length - 1 && !canStream) {
                                 var iconX = $("<i>").attr("class", "fas fa-times fa-2x");
@@ -279,10 +272,7 @@ $(document).ready(function () {
                     }
                     $("#streaming-services").append(streamDiv)
                 }
-               
             }
-            // console.log(streamingURLs)
-            // console.log(streamingLocations)
             $("#movie-poster").attr("data-locations", streamingLocations)
             $("#movie-poster").attr("data-locations-length", streamingLocations.length)
             $("#streaming-services").attr("data-urls", streamingURLs)
@@ -331,34 +321,13 @@ $(document).ready(function () {
                 }
             }
             $('#streaming-services').append(streamDiv)
-
         }
     }
-    // List-favorites div
-    // function addFavoriteCard(title, poster) {
-    //     var favoriteCard = $("<div>")
-    //         .addClass("card favorite-card")
-
-    //         .attr("data-movie", title);
-
-    //     var cardBody = $("<div>").addClass("card-body fav-buttons-below");
-    //     var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
-    //     buttonsDiv.append(($("<button>")
-    //         .attr("type", "button")
-    //         .addClass("btn btn-secondary btn-sm btn-success info-btn")
-    //         .text("Info")));
-    //     buttonsDiv.append(($("<button>")
-    //         .attr("type", "button")
-    //         .addClass("btn btn-secondary btn-sm btn-danger remove-btn")
-    //         .text("Remove")));
-    //     cardBody.append(buttonsDiv);
-    //     favoriteCard.append(($("<img>")
-    //         .attr("src", poster)
-    //         .addClass("card-img-top fav-img")));
-    //     favoriteCard.append(cardBody);
-    //     $("#list-favorites").append(favoriteCard);
-    // }
-
+        // var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
+        // buttonsDiv.append(($("<button>")
+        //     .attr("type", "button")
+        //     .addClass("btn btn-secondary btn-sm btn-success info-btn")
+        //     .text("Info")));
     function sticktothetop() {
         var window_top = $(window).scrollTop();
         var top = $('#stick-here').offset().top;
@@ -369,6 +338,5 @@ $(document).ready(function () {
             $('#stickThis').removeClass('stick');
             $('#stick-here').height(0);
         }
-
     }
 })

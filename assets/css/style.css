@@ -63,22 +63,24 @@ footer {
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;
 }
+
 .card-title {
     border:none;
     margin-right:10px;
     float:left;
 
 }
+
 .card-img-top {
     height: 40px;
 }
+
 #streaming-services.row {
-    /* width: 500px; */
     height: 120px;
-    /* border: solid 2px grey; */
     border-radius: 10px;
     padding-top: 5px;
 }
+
 div.card-body.px-5 {
 
     padding:10px;
@@ -91,7 +93,6 @@ div.card-body.px-5 {
 #rt-audience-img {
     max-width: 22px;
 }
-
 
 #rt-fresh-img {
     max-width: 28px;
@@ -112,18 +113,11 @@ div.card-body.px-5 {
     color: purple;
 }
 
-
 .fav-buttons-below,
 .fav-info-buttons {
     width: 100%;
     padding: 0;
 }
-
-/* .favorite-card {
-    width: 145px;
-    float: left;
-    margin: 4px 4px;
-} */
 
 .fav-img {
     height: 210px;
@@ -193,39 +187,6 @@ div.card-body.px-5 {
     position: relative;
     left: 20px;
     top: 5px;
-}
-
-#panel {
-    background-color: white;
-    position: absolute;
-    float: left;
-    z-index: 1;
-    overflow-x: hidden;
-    transition: all .2s ease-out;
-}
-
-.open {
-    width: 300px;
-}
-
-.hero {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    display: block;
-}
-
-.place {
-    font-size: 1.7em
-}
-
-.details {
-    color: darkrgb(0, 132, 255);
-}
-
-a {
-    text-decoration: none;
-    color: rgb(0, 132, 255)violet;
 }
 
 @media screen and (min-width: 1200px) {

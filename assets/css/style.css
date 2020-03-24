@@ -124,7 +124,7 @@ div.card-body.px-5 {
     width: 33%;
 }
 .fav-streaming {
-    padding-left: 0px;
+    max-width: 300px;
 }
 
 .info-btn {

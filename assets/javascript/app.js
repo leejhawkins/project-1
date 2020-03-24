@@ -162,9 +162,9 @@ $(document).ready(function () {
     function addFavoriteCard(title, poster,locations,urls,plot) {
         console.log(locations)
         var favoriteCard = $("<div>")
-            .addClass("card")
+            .addClass("card mb-3")
             .attr("data-movie", title);
-        var favoriteRow= ($("<div>").addClass("row"))
+        var favoriteRow= ($("<div>").addClass("row no-gutter"))
         var cardBody = $("<div>").addClass("col-md-5 fav-streaming");
         var buttonsDiv = $("<div>").addClass("btn-group");
         for (var i=0;i<yourStreaming.length;i++) {

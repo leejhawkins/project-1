@@ -2,7 +2,7 @@
 
 ## Clayton Hill, Lee Hawkins, and Jason Tompkins
 
-### Link to the app (https://github.com/leejhawkins/project-1.git)
+### Link to the app (https://leejhawkins.github.io/project-1/index.html)
 
 ## Search your movie you want to watch and the platform you want to stream from.
 

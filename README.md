@@ -10,4 +10,4 @@
 
 ## OMDB, Utelly and Youtube APIs
 
-![screenshot](assets/images/sceenshot.png)
+![screenshot](assets/images/screenshot.png)

@@ -20,7 +20,7 @@ $(document).ready(function () {
             var streamingURLsLength = movies[i].urlsNum
             var streamingURLsArray = streamingURLs.split(",", streamingURLsLength)
             console.log(movies[i].locations)
-            addFavoriteCard(movies[i].title, movies[i].poster, streamingLocationsArray,streamingURLsArray,movies[i].plot);
+            addFavoriteCard(movies[i].title, movies[i].poster, streamingLocationsArray,streamingURLsArray,movies[i].plot,movies[i].runtime,movies[i].rated);
         }
     }
     if (yourStreaming.length > 0) {
@@ -51,6 +51,8 @@ $(document).ready(function () {
         var movieTitle = $("#movie-title").text();
         var moviePoster = $("#movie-poster").attr("src");
         var moviePlot = $("#movie-plot").text();
+        var movieRated =$("#movie-rated").text();
+        var movieRuntime= $("#movie-runtime").text();
         var streamingLocations = ($("#movie-poster").attr("data-locations"))
         var streamingLocationsLength = ($("#movie-poster")).attr("data-locations-length")
         var streamingLocationsArray = streamingLocations.split(",", streamingLocationsLength)
@@ -64,9 +66,9 @@ $(document).ready(function () {
         }
 
         if (movies.findIndex(isMovieMatch) == -1) {
-            movies.push({ poster: moviePoster, title: movieTitle, locations: streamingLocations, locationNum: streamingLocationsLength,urls: streamingURLs,urlsNum:streamingLocationsLength,plot:moviePlot });
+            movies.push({ poster: moviePoster, title: movieTitle, locations: streamingLocations, locationNum: streamingLocationsLength,urls: streamingURLs,urlsNum:streamingLocationsLength,plot:moviePlot,runtime:movieRuntime,rated:movieRated });
             localStorage.setItem("movies", JSON.stringify(movies));
-            addFavoriteCard(movieTitle, $("#movie-poster").attr("src"),streamingLocationsArray,streamingURLsArray,moviePlot);
+            addFavoriteCard(movieTitle, $("#movie-poster").attr("src"),streamingLocationsArray,streamingURLsArray,moviePlot,movieRuntime,movieRated);
         }
     })
 
@@ -159,7 +161,7 @@ $(document).ready(function () {
     }
 
     // Adds movie card to favorites div
-    function addFavoriteCard(title, poster,locations,urls,plot) {
+    function addFavoriteCard(title, poster,locations,urls,plot,runtime,rated) {
         console.log(locations)
         var favoriteCard = $("<div>")
             .addClass("card mb-3")
@@ -196,10 +198,6 @@ $(document).ready(function () {
             .text("Remove")));
         buttonsDiv.append(($("<button>")
             .attr("type", "button")
-            .attr("data-toggle","tooltip")
-            .attr("data-html","true")
-            .attr("data-placement","top")
-            .attr("title","Plot:  ")
             .addClass("btn btn-secondary btn-sm btn-success info-btn")
             .text("Watch Trailer")))
         cardBody.append(buttonsDiv);
@@ -207,8 +205,10 @@ $(document).ready(function () {
             .attr("src", poster)
             .addClass("col-md-4 fav-img")));
         favoriteRow.append(cardBody)
-        favoriteRow.append($("<div>").addClass("col-md-3").css("font-size","10px").text("Plot:  "+ plot))
-        favoriteCard.append(favoriteRow);
+        favoriteRow.append($("<div>").addClass("col-md-3").css("font-size","10px").html("<b>Rated:</b> "+ rated).append($("<div>").html("<b>Runtime:</b> "+runtime).append($("<div>").html("<b>Plot:</b>  "+plot))))
+
+       
+        favoriteCard.append(favoriteRow)
         $("#list-favorites").append(favoriteCard);
     }
 

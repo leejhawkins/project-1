@@ -223,9 +223,6 @@ div.card-body.px-5 {
 @media screen and (max-width:700px) {
     .fav-img {
         height:140px;
-    }
-    .card-img-top {
-        size:50%;
-    }
+    } 
 
 }

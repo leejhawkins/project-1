@@ -2,14 +2,12 @@
 
 ## Clayton Hill, Lee Hawkins, and Jason Tompkins
 
+### Link to the app (https://github.com/leejhawkins/project-1.git)
+
 ## Search your movie you want to watch and the platform you want to stream from.
 
 ## Input what movie you want to see and the page will pull up which site shows it and all the info of the movie.
 
-## OMDB and Youtube APIs
+## OMDB, Utelly and Youtube APIs
 
-## Process on building page
-1. Create page layout html/css
-2. Get API links
-3. Create javascript/ ajax file
-
+![screenshot](assets/images/sceenshot.png)

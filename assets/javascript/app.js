@@ -20,7 +20,7 @@ $(document).ready(function () {
             var streamingURLsLength = movies[i].urlsNum
             var streamingURLsArray = streamingURLs.split(",", streamingURLsLength)
             console.log(movies[i].locations)
-            addFavoriteCard(movies[i].title, movies[i].poster, streamingLocationsArray,streamingURLsArray);
+            addFavoriteCard(movies[i].title, movies[i].poster, streamingLocationsArray,streamingURLsArray,movies[i].plot);
         }
     }
     if (yourStreaming.length > 0) {
@@ -50,6 +50,7 @@ $(document).ready(function () {
     $("#fav-heart").on("click", function () {
         var movieTitle = $("#movie-title").text();
         var moviePoster = $("#movie-poster").attr("src");
+        var moviePlot = $("#movie-plot").text();
         var streamingLocations = ($("#movie-poster").attr("data-locations"))
         var streamingLocationsLength = ($("#movie-poster")).attr("data-locations-length")
         var streamingLocationsArray = streamingLocations.split(",", streamingLocationsLength)
@@ -63,14 +64,14 @@ $(document).ready(function () {
         }
 
         if (movies.findIndex(isMovieMatch) == -1) {
-            movies.push({ poster: moviePoster, title: movieTitle, locations: streamingLocations, locationNum: streamingLocationsLength,urls: streamingURLs,urlsNum:streamingLocationsLength });
+            movies.push({ poster: moviePoster, title: movieTitle, locations: streamingLocations, locationNum: streamingLocationsLength,urls: streamingURLs,urlsNum:streamingLocationsLength,plot:moviePlot });
             localStorage.setItem("movies", JSON.stringify(movies));
-            addFavoriteCard(movieTitle, $("#movie-poster").attr("src"),streamingLocationsArray,streamingURLsArray);
+            addFavoriteCard(movieTitle, $("#movie-poster").attr("src"),streamingLocationsArray,streamingURLsArray,moviePlot);
         }
     })
 
     $("#list-favorites").on("click", ".info-btn", function () {
-        getMovieInfo($(this).parent().parent().parent().attr("data-movie"));
+        getMovieInfo($(this).parent().parent().parent().parent().attr("data-movie"));
     })
 
     // Removes favorites
@@ -97,7 +98,7 @@ $(document).ready(function () {
     function getMovieInfo(movie) {
 
         var omdbQueryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-
+        $("#streaming-services").empty()
         $.ajax({
             url: omdbQueryURL,
             method: "GET"
@@ -148,7 +149,7 @@ $(document).ready(function () {
                 }
 
                 $("#movie-info").css("display", "block");
-                $("#streaming-i nfo").css("display", "block");
+                $("#streaming-info").css("display", "block");
                 $("#trailer").css("display", "block");
 
                 getStreamingInfo(imdbId);
@@ -158,7 +159,7 @@ $(document).ready(function () {
     }
 
     // Adds movie card to favorites div
-    function addFavoriteCard(title, poster,locations,urls) {
+    function addFavoriteCard(title, poster,locations,urls,plot) {
         console.log(locations)
         var favoriteCard = $("<div>")
             .addClass("card")
@@ -193,11 +194,20 @@ $(document).ready(function () {
             .attr("type", "button")
             .addClass("btn btn-secondary btn-sm btn-danger remove-btn")
             .text("Remove")));
+        buttonsDiv.append(($("<button>")
+            .attr("type", "button")
+            .attr("data-toggle","tooltip")
+            .attr("data-html","true")
+            .attr("data-placement","top")
+            .attr("title","Plot:  ")
+            .addClass("btn btn-secondary btn-sm btn-success info-btn")
+            .text("Watch Trailer")))
         cardBody.append(buttonsDiv);
         favoriteRow.append(($("<img>")
             .attr("src", poster)
             .addClass("col-md-4 fav-img")));
         favoriteRow.append(cardBody)
+        favoriteRow.append($("<div>").addClass("col-md-3").css("font-size","10px").text("Plot:  "+ plot))
         favoriteCard.append(favoriteRow);
         $("#list-favorites").append(favoriteCard);
     }
@@ -323,11 +333,7 @@ $(document).ready(function () {
             $('#streaming-services').append(streamDiv)
         }
     }
-        // var buttonsDiv = $("<div>").addClass("btn-group fav-info-buttons");
-        // buttonsDiv.append(($("<button>")
-        //     .attr("type", "button")
-        //     .addClass("btn btn-secondary btn-sm btn-success info-btn")
-        //     .text("Info")));
+       
     function sticktothetop() {
         var window_top = $(window).scrollTop();
         var top = $('#stick-here').offset().top;
@@ -338,5 +344,5 @@ $(document).ready(function () {
             $('#stickThis').removeClass('stick');
             $('#stick-here').height(0);
         }
-    }
+     }
 })

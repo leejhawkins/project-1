@@ -130,6 +130,7 @@ div.card-body.px-5 {
 .info-btn {
     background: rgb(0, 132, 255);
     border: 1px solid rgb(77, 0, 128);
+    width:50%;
 }
 
 .info-btn:hover {
@@ -140,12 +141,20 @@ div.card-body.px-5 {
 .remove-btn {
     background: rgb(0, 132, 255);
     border: 1px solid rgb(77, 0, 128);
+    width: 50%;
 }
 
 .remove-btn:hover {
     background: rgba(28, 2, 170, 0.685);
     border: 1px solid rgb(0, 119, 255);
 }
+.btn-group {
+    width:100%;
+}
+.tooltip-inner {
+    background:blue;
+}
+
 
 #streaming-info,
 #movie-info,
@@ -187,7 +196,7 @@ div.card-body.px-5 {
     position: relative;
     left: 20px;
     top: 5px;
-}
+ }
 
 @media screen and (min-width: 1200px) {
     .fa-check,

@@ -205,7 +205,7 @@ $(document).ready(function () {
     // Youtube API Use
     function getYoutubeTrailer(imdbId) {
 
-        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + imdbId + " trailer&key=AIzaSyC_VBnzUWZnu_i1CYl1oqzpytR8vnFNrkY";
+        var youtubeQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + imdbId + " trailer&key=AIzaSyDxBaK-0M8dUQnpzcL4Hpz7jDTov6BkX6M";
 
         $.ajax({
             url: youtubeQueryURL,
